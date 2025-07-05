@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  font-weight: bold;
+}
+
+/* Remove the previous .card img rule to avoid conflicts */
+/* .card img {
+  height: 200px;
+  object-fit: cover;
+} */
+
+.card-img-top {
+  width: 610px;
+  height: 344px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
