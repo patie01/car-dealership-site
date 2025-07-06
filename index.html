@@ -1,14 +1,20 @@
 <section id="cars" class="container my-5">
-  <h2 class="text-center mb-4">Our Cars</h2>
+  <div class="text-center my-4">
+    <div class="header-logo-wrapper">
+      <img src="HLlogo.png" alt="Company Logo" class="company-logo">
+    </div>
+  </div>
+  <h2 class="text-center mb-4">Cars for Sale</h2>
   <div class="row g-4">
 
     <!-- Mercedes-Benz -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="benz3.jpg" class="card-img-top" alt="Mercedes-Benz">
-        <img src="benz1.jpg" class="card-img-top" alt="Mercedes-Benz">
-        <img src="benz.jpg" class="card-img-top"  alt="Mercedes-Benz">
-        <img src="benz4.jpg" class="card-img-top"  alt="Mercedes-Benz">
+        <div class="car-img-wrapper" style="position:relative;">
+          <button class="car-arrow left" onclick="event.stopPropagation();prevCardImage('benz')">&#10094;</button>
+          <img id="benz-main" src="benz3.jpg" class="card-img-top car-main" alt="Mercedes-Benz" data-gallery="benz" onclick="openGallery('benz')">
+          <button class="car-arrow right" onclick="event.stopPropagation();nextCardImage('benz')">&#10095;</button>
+        </div>
         <div class="card-body">
           <h5 class="card-title">Mercedes-Benz Compressor c180</h5>
           <p class="card-text">2005 Model <br> Smooth Drive <br> very good condition
@@ -23,12 +29,11 @@
     <!-- Chevrolet Spark -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="chev2.jpg" class="card-img-top" alt="Chevrolet Spark">
-        <img src="chev.jpg" class="card-img-top" alt="Chevrolet Spark">
-        <img src="chev1.jpg" class="card-img-top" alt="Chevrolet Spark">
-        <img src="chev3.jpg" class="card-img-top" alt="Chevrolet Spark">
-        <img src="chev4.jpg" class="card-img-top" alt="Chevrolet Spark">
-        <img src="chev5.jpg" class="card-img-top" alt="Chevrolet Spark">
+        <div class="car-img-wrapper" style="position:relative;">
+          <button class="car-arrow left" onclick="event.stopPropagation();prevCardImage('chev')">&#10094;</button>
+          <img id="chev-main" src="chev2.jpg" class="card-img-top car-main" alt="Chevrolet Spark" data-gallery="chev" onclick="openGallery('chev')">
+          <button class="car-arrow right" onclick="event.stopPropagation();nextCardImage('chev')">&#10095;</button>
+        </div>
         <div class="card-body">
           <h5 class="card-title">Chevrolet Spark</h5>
           <p class="card-text">2011 Model <br>Powersteering <br> Excellent condition <br> Clean interior
@@ -42,9 +47,11 @@
     <!-- Mazda 3 -->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="mazda2.jpg" class="card-img-top" alt="Mazda 3">
-        <img src="mazda1.jpg" class="card-img-top" alt="Mazda 3">
-        <img src="mazda4.jpg" class="card-img-top" alt="Mazda 3">
+        <div class="car-img-wrapper" style="position:relative;">
+          <button class="car-arrow left" onclick="event.stopPropagation();prevCardImage('mazda')">&#10094;</button>
+          <img id="mazda-main" src="mazda2.jpg" class="card-img-top car-main" alt="Mazda 3" data-gallery="mazda" onclick="openGallery('mazda')">
+          <button class="car-arrow right" onclick="event.stopPropagation();nextCardImage('mazda')">&#10095;</button>
+        </div>
         <div class="card-body">
           <h5 class="card-title">Mazda 3 Sedan</h5>
           <p class="card-text">2009 model <br>Transmission:Manual <br> fuel Type: Petrol 
@@ -59,11 +66,11 @@
     <!-- Toyota Hilux Bakkie-->
     <div class="col-md-3 col-sm-6">
       <div class="card h-100">
-        <img src="toyota1.jpg" class="card-img-top" alt="Toyota Hilux">
-        <img src="toyota2.jpg" class="card-img-top" alt="Toyota Hilux">
-        <img src="toyota3.jpg" class="card-img-top" alt="Toyota Hilux">
-        <img src="toyota4.jpg" class="card-img-top" alt="Toyota Hilux">
-        <img src="toyota5.jpg" class="card-img-top" alt="Toyota Hilux">
+        <div class="car-img-wrapper" style="position:relative;">
+          <button class="car-arrow left" onclick="event.stopPropagation();prevCardImage('toyota')">&#10094;</button>
+          <img id="toyota-main" src="toyota1.jpg" class="card-img-top car-main" alt="Toyota Hilux" data-gallery="toyota" onclick="openGallery('toyota')">
+          <button class="car-arrow right" onclick="event.stopPropagation();nextCardImage('toyota')">&#10095;</button>
+        </div>
         <div class="card-body">
           <h5 class="card-title">Toyota Hilux</h5>
           <p class="card-text">2010 Model <br> Diesel<br>
@@ -85,3 +92,74 @@
 
   </div>
 </section>
+
+<!-- Modal Gallery HTML (place just before </body>) -->
+<div id="galleryModal" class="modal">
+  <span class="modal-close" onclick="closeGallery()">&times;</span>
+  <div class="modal-content">
+    <button class="modal-arrow left" onclick="prevImage()">&#10094;</button>
+    <img id="galleryMainImg" src="" alt="Car Image">
+    <button class="modal-arrow right" onclick="nextImage()">&#10095;</button>
+    <div id="galleryCaption"></div>
+  </div>
+</div>
+
+<script>
+const carImages = {
+  benz: ["benz3.jpg", "benz1.jpg", "benz.jpg", "benz4.jpg"],
+  chev: ["chev2.jpg", "chev.jpg", "chev1.jpg", "chev3.jpg", "chev4.jpg", "chev5.jpg"],
+  mazda: ["mazda2.jpg", "mazda1.jpg", "mazda4.jpg"],
+  toyota: ["toyota1.jpg", "toyota2.jpg", "toyota3.jpg", "toyota4.jpg", "toyota5.jpg"]
+};
+let currentGallery = null;
+let currentIndex = 0;
+const cardIndexes = { benz: 0, chev: 0, mazda: 0, toyota: 0 };
+function openGallery(car) {
+  currentGallery = car;
+  currentIndex = 0;
+  showGalleryImage();
+  document.getElementById('galleryModal').classList.add('show');
+}
+function closeGallery() {
+  document.getElementById('galleryModal').classList.remove('show');
+}
+function showGalleryImage() {
+  const images = carImages[currentGallery];
+  const img = document.getElementById('galleryMainImg');
+  img.src = images[currentIndex];
+  img.alt = `${currentGallery} image ${currentIndex+1}`;
+  document.getElementById('galleryCaption').textContent = `${capitalize(currentGallery)} (${currentIndex+1} of ${images.length})`;
+}
+function nextImage() {
+  const images = carImages[currentGallery];
+  currentIndex = (currentIndex + 1) % images.length;
+  showGalleryImage();
+}
+function prevImage() {
+  const images = carImages[currentGallery];
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  showGalleryImage();
+}
+function nextCardImage(car) {
+  const images = carImages[car];
+  cardIndexes[car] = (cardIndexes[car] + 1) % images.length;
+  document.getElementById(car + '-main').src = images[cardIndexes[car]];
+}
+function prevCardImage(car) {
+  const images = carImages[car];
+  cardIndexes[car] = (cardIndexes[car] - 1 + images.length) % images.length;
+  document.getElementById(car + '-main').src = images[cardIndexes[car]];
+}
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('galleryModal').classList.contains('show')) return;
+  if (e.key === 'ArrowRight') nextImage();
+  if (e.key === 'ArrowLeft') prevImage();
+  if (e.key === 'Escape') closeGallery();
+});
+document.getElementById('galleryModal').addEventListener('click', function(e) {
+  if (e.target === this) closeGallery();
+});
+</script>
